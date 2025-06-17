@@ -1,0 +1,30 @@
+{
+	"schemaVersion": 1,
+	"id": "mist",
+	"version": "${version}",
+	"name": "Mist mod",
+	"description": "Mist mod!",
+	"authors": [
+		"8mist"
+	],
+	"contact": {
+		"sources": "https://github.com/8mist/mist-mod"
+	},
+	"license": "LGPL-3.0-only",
+	"icon": "assets/mist/icon.png",
+	"environment": "*",
+	"entrypoints": {
+		"client": [
+			"fr.mist.MistMod"
+		]
+	},
+	"depends": {
+		"fabricloader": ">=0.16.10",
+		"minecraft": "~1.21.4",
+		"java": ">=17",
+		"fabric-api": "*"
+	},
+	"suggests": {
+		"another-mod": "*"
+	}
+}
