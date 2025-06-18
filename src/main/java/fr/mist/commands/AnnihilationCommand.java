@@ -71,29 +71,31 @@ public class AnnihilationCommand extends Command {
 
                 Instant latestEvent = lastEvents.getLast();
 
-                McUtils.sendMessageStyledToClient("§c§lEstimation for Annihilation");
-                McUtils.sendMessageStyledToClient("§7Estimations are §lpredictions §r§7based on historical data from past Annihilations to only give an estimate of the next Annihilation.\nWorld Events are scheduled within a random period of time.\n");
+                McUtils.mc().execute(() -> {
+                    McUtils.sendMessageStyledToClient("§c§lEstimation for Annihilation");
+                    McUtils.sendMessageStyledToClient("§7Estimations are §lpredictions §r§7based on historical\ndata from past Annihilations to only give\nan estimate of the next Annihilation.\n§8World Events are scheduled within a random period of time.\n");
 
-                if (q1.isPresent()) {
-                    Instant estimateQ1 = addHours(latestEvent, q1.getAsDouble());
-                    long durationMillisQ1 = Duration.between(Instant.now(), estimateQ1).toMillis();
-                    String formattedDate = formatter.format(durationMillisQ1);
-                    McUtils.sendMessageStyledToClient("§eLow Estimate (Q1): §r" + formattedDate);
-                }
+                    if (q1.isPresent()) {
+                        Instant estimateQ1 = addHours(latestEvent, q1.getAsDouble());
+                        long durationMillisQ1 = Duration.between(Instant.now(), estimateQ1).toMillis();
+                        String formattedDate = formatter.format(durationMillisQ1);
+                        McUtils.sendMessageStyledToClient("§eLow Estimate (Q1): §r" + formattedDate);
+                    }
 
-                if (q3.isPresent()) {
-                    Instant estimateQ3 = addHours(latestEvent, q3.getAsDouble());
-                    long durationMillisQ3 = Duration.between(Instant.now(), estimateQ3).toMillis();
-                    String formattedDate = formatter.format(durationMillisQ3);
-                    McUtils.sendMessageStyledToClient("§eUpper Estimate (Q3): §r" + formattedDate);
-                }
+                    if (q3.isPresent()) {
+                        Instant estimateQ3 = addHours(latestEvent, q3.getAsDouble());
+                        long durationMillisQ3 = Duration.between(Instant.now(), estimateQ3).toMillis();
+                        String formattedDate = formatter.format(durationMillisQ3);
+                        McUtils.sendMessageStyledToClient("§eUpper Estimate (Q3): §r" + formattedDate);
+                    }
 
-                if (q2.isPresent()) {
-                    Instant estimateQ2 = addHours(latestEvent, q2.getAsDouble());
-                    long durationMillisQ2 = Duration.between(Instant.now(), estimateQ2).toMillis();
-                    String formattedDate = formatter.format(durationMillisQ2);
-                    McUtils.sendMessageStyledToClient("§eAverage (Q2): §r" + formattedDate);
-                }
+                    if (q2.isPresent()) {
+                        Instant estimateQ2 = addHours(latestEvent, q2.getAsDouble());
+                        long durationMillisQ2 = Duration.between(Instant.now(), estimateQ2).toMillis();
+                        String formattedDate = formatter.format(durationMillisQ2);
+                        McUtils.sendMessageStyledToClient("§eAverage (Q2): §r" + formattedDate);
+                    }
+                });
             }
         });
 
