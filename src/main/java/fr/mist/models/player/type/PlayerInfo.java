@@ -115,7 +115,8 @@ public record PlayerInfo(
 					? json.get("nickname").getAsString() : null;
 			String uuid = json.get("uuid").getAsString();
 			String rank = json.get("rank").getAsString();
-			String rankBadge = json.get("rankBadge").getAsString();
+			String rankBadge = json.has("rankBadge") && !json.get("rankBadge").isJsonNull()
+					? json.get("rankBadge").getAsString() : null;
 
 			fr.mist.models.player.type.PlayerInfo.LegacyRankColour legacyRankColour = json.has("legacyRankColour") && !json.get("legacyRankColour").isJsonNull()
 					? context.deserialize(json.get("legacyRankColour"), fr.mist.models.player.type.PlayerInfo.LegacyRankColour.class)
