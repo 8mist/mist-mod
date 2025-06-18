@@ -67,24 +67,26 @@ public class GuildCommand extends Command {
                     return;
                 }
 
-                McUtils.sendMessageStyledToClient("§3§l" + guild.name() + " §f- Online members §f(§b" + onlineMembers.size() + "§f):");
+                McUtils.mc().execute(() -> {
+                    McUtils.sendMessageStyledToClient("§3§l" + guild.name() + " §f- Online members §f(§b" + onlineMembers.size() + "§f):");
 
-                Map<GuildRank, List<GuildMemberInfo>> membersByRank = onlineMembers.stream()
-                        .collect(Collectors.groupingBy(GuildMemberInfo::rank));
+                    Map<GuildRank, List<GuildMemberInfo>> membersByRank = onlineMembers.stream()
+                            .collect(Collectors.groupingBy(GuildMemberInfo::rank));
 
-                for (GuildRank rank : GuildRank.values()) {
-                    List<GuildMemberInfo> members = membersByRank.get(rank);
-                    if (members == null || members.isEmpty()) {
-                        continue;
+                    for (GuildRank rank : GuildRank.values()) {
+                        List<GuildMemberInfo> members = membersByRank.get(rank);
+                        if (members == null || members.isEmpty()) {
+                            continue;
+                        }
+
+                        McUtils.sendMessageStyledToClient("§7" + rank.getGuildDescription() + ":");
+                        String joinedNames = members.stream()
+                                .map(GuildMemberInfo::username)
+                                .collect(Collectors.joining("§f, §b"));
+
+                        McUtils.sendMessageStyledToClient("§b" + joinedNames);
                     }
-
-                    McUtils.sendMessageStyledToClient("§7" + rank.getGuildDescription() + ":");
-                    String joinedNames = members.stream()
-                            .map(GuildMemberInfo::username)
-                            .collect(Collectors.joining("§f, §b"));
-
-                    McUtils.sendMessageStyledToClient("§b" + joinedNames);
-                }
+                });
             }
         });
 
